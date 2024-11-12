@@ -1,0 +1,10 @@
+- name: Create Windows Server
+  hosts: all
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Include credentials
+      include_vars: credentials.yml
+
+    - name: Create EC2 instance and configure security group
+      include: roles/main.yml

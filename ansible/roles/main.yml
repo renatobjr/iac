@@ -1,0 +1,29 @@
+- name: Create security group
+  community.aws.ec2_security_group:
+    name: my-security-group
+    description: Allow SSH and RDP
+    vpc_id: your_vpc_id
+    rules:
+      - protocol: tcp
+        port: 22
+        from_port: 22
+        to_port: 22
+        cidr_ips:
+          - 0.0.0.0/0
+      - protocol: tcp
+        port: 3359
+        from_port: 3359
+        to_port: 3359
+        cidr_ips:
+          - 0.0.0.0/0
+
+- name: Create EC2 instance
+  community.aws.ec2:
+    key_name: your_key_pair
+    instance_type: t2.micro
+    image: ami-your_ami_id # Substitua pelo AMI do Windows Server 2019
+    wait: yes
+    tags:
+      Name: MyWindowsInstance
+    security_groups:
+      - my-security-group
