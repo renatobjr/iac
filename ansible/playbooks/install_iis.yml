@@ -7,4 +7,4 @@
       include_vars: credentials.yml
 
     - name: Create EC2 instance and configure security group
-      include: roles/main.yml
+      include_tasks: roles/main.yml
